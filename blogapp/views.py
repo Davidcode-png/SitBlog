@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .utils import paginationProfile
 from .forms import CustomUserCreationForm, PostForm,CommentForm,ContactForm
 
+
 def index(request):
     posts = Post.objects.all()
     categories = Category.objects.all()
@@ -55,6 +56,7 @@ def logoutUser(request):
     return redirect(loginUser)
 
 def contact(request):
+    first_name = ''
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -66,13 +68,13 @@ def contact(request):
             #message = "\n".join(body.values())
 
             try:
-                send_mail(subject, message, email, ['admin@example.com']) 
+                send_mail(subject, message, email, ['codavidson0@gmail.com']) 
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-            return redirect (index)
+            #return redirect (contact)
             
     form = ContactForm()
-    return render(request, "blogapp/contact.html", {'form':form})
+    return render(request, "blogapp/contact.html", {'form':form,'first_name':first_name})
 
 
 @login_required(login_url='login')
