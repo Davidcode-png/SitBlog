@@ -25,7 +25,7 @@ environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
+password = os.environ.key('EMAIL_HOST_PASSWORD')
 key = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = key
@@ -157,7 +157,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'codavidson0@gmail.com'
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_PASSWORD = password
 EMAIL_USE_TLS = True
 
 django_heroku.settings(locals())
