@@ -3,7 +3,9 @@ from django import forms
 from .models import Profile,Post,Tag,Comment
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
+from django.forms import Textarea,SelectMultiple
+from django.forms import TextInput,MultipleChoiceField,CheckboxSelectMultiple
+from django_select2.forms import Select2MultipleWidget
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
