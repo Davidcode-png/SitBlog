@@ -1,0 +1,178 @@
+{% extends 'main.html' %}
+{% block title %}
+{% load static %}
+Home
+{% endblock title %}
+
+{% block content %}
+      <!-- ***** Preloader Start ***** -->
+      <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+
+
+    <!-- Header -->
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href={% url 'index'%} ><h2>Sit Blog<em>.</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href={% url 'index' %}>Home
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li> 
+                <li class="nav-item active">
+                  <a class="nav-link" href={% url 'blog'%}>Blog Entries</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{%url 'create' %}">New Post</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                
+                <li class="nav-item">
+                  <a class="nav-link" href="{%url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                
+                <li class="nav-item">
+                  <a class="nav-link" href={%url 'login'%}>Log In</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{%url 'contact'%}">Contact Us</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>Recent Posts</h4>
+                <h2>Our Recent Blog Entries</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Banner Ends Here -->
+
+    <section class="call-to-action">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="main-content">
+              <div class="row">
+                <div class="col-lg-8">
+                  <span>The Sit Blog</span>
+                  <h4>Sit while blogging, blog while sitting</h4>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="blog-posts grid-system">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+                {% for post in posts %}
+                <div class="col-lg-6">
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                      <img src="{{MEDIA_URL}}{{post.thumbnail.url}}" alt="{{post.thumbnail.url}}">
+                    </div>
+                    <div class="down-content">
+                      <span>{{post.category}}</span>
+                      <a href={% url 'post_detail' post.id %}><h4>{{post.title}}</h4></a>
+                      <ul class="post-info">
+                        <li><a href="#">{{post.author}}</a></li>
+                        <li><a href="#">{{post.created}}</a></li>
+                        <li><a href="#">{{post.comments.count}} Comments</a></li>
+                      </ul>
+                      <p><p>{{post.description|slice:':120'}} .....</p></p>
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            {% comment %} <ul class="post-tags">
+                              <li><i class="fa fa-tags"></i></li>
+                              {% for tag in post.tags.all %}
+                              <li><a href="#">{{tag}},</a></li>
+                              {% endfor %}
+                            </ul> {% endcomment %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <div class="col-lg-12">
+                  <ul class="page-numbers">
+                    {% for page in custom_range %}
+                    {% if page == posts.number %}
+                    <li class='active'><a href="?page={{page}}" data-page="{{page}}">{{page}}</a></li>
+                    {% else %}
+                    <li ><a href="?page={{page}}" data-page="{{page}}">{{page}}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% include 'recent.html' with posts=posts %}
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="social-icons">
+              <li><a href="www.facebook.com">Facebook</a></li>
+              <li><a href="www.twitter.com">Twitter</a></li>
+              <li><a href="www.instagram.com">Instagram</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>Copyright 2020 David.
+                  </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+{% endblock content %}

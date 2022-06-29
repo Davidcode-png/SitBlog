@@ -1,0 +1,206 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+{% load static %}
+Home - Entered
+{% endblock title %}
+
+
+{% block content %}
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+
+    <!-- Header -->
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href={% url 'index'%}><h2>Sit Blog<em>.</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href={% url 'index' %}>Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href={% url 'blog'%}>Blog Entries</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{%url 'create' %}">New Post</a>
+              </li>
+              {% if request.user.is_authenticated %}
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{%url 'logout' %}">Logout</a>
+              </li>
+              {% else %}
+              
+              <li class="nav-item">
+                <a class="nav-link" href={%url 'login'%}>Log In</a>
+              </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{%url 'contact'%}">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>{{post.title}}</h4>
+                <h2>Single blog post</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Banner Ends Here -->
+
+    <section class="call-to-action">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="main-content">
+              <div class="row">
+                <div class="col-lg-8">
+                  <span>The Sit Blog</span>
+                  <h4>Sit while blogging, blog while sitting</h4>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="blog-posts grid-system">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                      <img src="{{post.thumbnail.url}}" alt="">
+                    </div>
+                    <div class="down-content">
+                      <span>{{post.category}}</span>
+                      <a href="post-details.html"><h4>{{post.title}}</h4></a>
+                      <ul class="post-info">
+                        <li><a href="#">{{post.author}}</a></li>
+                        <li><a href="#">{{post.created}}</a></li>
+                        <li><a href="#">{{post.comments.count}} Comments</a></li>
+                      </ul>
+                      <h5 style = 'color:black'>{{post.description}}</h5>
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-6">
+                            <ul class="post-tags">
+                              {%if user.is_authenticated and request.user == post.author.user %}
+                              <li ><a style='font-size:20px' href="{% url 'edit' post.id %}">Edit</a></li>
+                              <li ><a style='font-size:20px' href="{% url 'delete' post.id %}">Delete</a></li>
+                            {% endif %}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item comments">
+                    <div class="sidebar-heading">
+                      <h2>{{post.comments.count}} comments</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                        {% for comment in comments %}
+                        <li>
+                          <div class="author-thumb">
+                          </div>
+                          <div class="right-content">
+                            <h4>{{comment.name}}<span>{{comment.created_on}}</span></h4>
+                            <p>{{comment.body}}</p>
+                          </div>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item submit-comment">
+                    <div class="sidebar-heading">
+                      <h2>Your comment</h2>
+                    </div>
+                    <div class="col-md-8 card mb-4  mt-3 ">
+                      <div class="card-body">
+                        {% comment %} {% if new_comment %}
+                        <div class="alert alert-success" role="alert">
+                          Your comment is awaiting moderation
+                        </div>
+                        {% else %} {% endcomment %}
+                        <h3>Leave a comment</h3>
+                        <form autocomplete="off" method="post" style="margin-top: 1.3em;">
+                          {{ comment_form | crispy }}
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+                        </form>
+                        {% comment %} {% endif %} {% endcomment %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {% include 'recent.html' with posts=posts categories=categories %}
+          
+        </div>
+      </div>
+    </section>
+    
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="social-icons">
+              <li><a href="www.facebook.com">Facebook</a></li>
+              <li><a href="www.twitter.com">Twitter</a></li>
+              <li><a href="www.instagram.com">Instagram</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>Copyright 2020 David
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+{% endblock content %}

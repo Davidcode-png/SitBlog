@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% block title %}
+{% load static %}
+Delete
+{% endblock title %}
+{% block content %}
+
+<div class="container" style=' padding:1.8%;display:flex;justify-content: center;height:200px;justify-content:center;position:absolute;top:33%;left:15%'>
+<form action="" method ="POST" >
+    {% csrf_token %}
+    <h1 style='font-size:3rem'>Are you sure you want to delete <span style='text-decoration:dotted underline;'>{{post.title}}</span><span style="font-size:3.5rem;">?</span></>
+        <h2>  <a style='color:white;font-size:2.0rem; padding:10% 0%;margin-top:5px'href="{% url 'post_detail' post.id %}">Go Back</a></h2>
+    <input type="submit" value="Confirm" style='margin-top:15px;padding:10px;font-size:1.2rem;' />
+</form>
+</div>
+{% endblock content %}
