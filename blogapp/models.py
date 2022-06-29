@@ -1,9 +1,6 @@
-from distutils.command.upload import upload
-from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
-from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,null=True,blank = True)
