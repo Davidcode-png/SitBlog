@@ -25,7 +25,7 @@ environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-password = os.environ.key('EMAIL_HOST_PASSWORD')
+password = os.environ.get('EMAIL_HOST_PASSWORD')
 key = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = key
