@@ -1,4 +1,3 @@
-from turtle import pos
 from django.urls import path
 from .views import index,about,post_detail,loginUser,registerUser,logoutUser,createPost,editPost,blog,categoryView,contact,deletePost
 from django.conf import settings
