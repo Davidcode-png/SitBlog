@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Profile,Post,Tag,Comment
+from .models import Profile,Post,Comment#Tag
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import Textarea,SelectMultiple
@@ -26,7 +26,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class PostForm(ModelForm):
-    options = [(option,option) for option in Tag.objects.all()]
+    #options = [(option,option) for option in Tag.objects.all()]
     #tags  = MultipleChoiceField(widget=Select2MultipleWidget,
     #                                     choices=options)
     class Meta:
@@ -47,7 +47,7 @@ class PostForm(ModelForm):
             #self.fields['description'].widget.attrs.update({'class':'form-control','placeholder':'Enter Blog Post','id':'exampleFormControlTextarea1','rows':'3'})
            # self.fields['category'].widget.attrs.update({'placeholder':'Username'})
             self.fields['thumbnail'].widget.attrs.update({'placeholder':'Password'})
-            self.fields['tags'].widget.attrs.update({'class':'selectpicker'})
+            #self.fields['tags'].widget.attrs.update({'class':'selectpicker'})
 
 class CommentForm(ModelForm):
     class Meta:

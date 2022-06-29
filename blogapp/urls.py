@@ -16,7 +16,7 @@ urlpatterns = [
     path('delete/<str:pk>',deletePost,name='delete'),
     path('edit-post/<str:pk>/',editPost,name='edit'),
 
-    path('<str:pk>/',post_detail,name='post_detail'),
+    path('post/<str:pk>/',post_detail,name='post_detail'),
 
 ]
 

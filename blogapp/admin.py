@@ -1,10 +1,9 @@
 from django.contrib import admin
-from .models import Category,Profile,Post,Tag,Comment
+from .models import Category,Profile,Post,Comment
 
 admin.site.register(Profile)
 admin.site.register(Category)
 admin.site.register(Post)
-admin.site.register(Tag)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):

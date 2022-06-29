@@ -1,6 +1,6 @@
 from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render,redirect,HttpResponse
-from .models import Post,Category,Tag
+from .models import Post,Category
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.decorators import login_required
@@ -11,9 +11,9 @@ from .forms import CustomUserCreationForm, PostForm,CommentForm,ContactForm
 def index(request):
     posts = Post.objects.all()
     categories = Category.objects.all()
-    tags = Tag.objects.all()
+    #tags = Tag.objects.all()
     
-    context = {'posts':posts,'categories':categories,'tags':tags}
+    context = {'posts':posts,'categories':categories,}
     return render(request,'blogapp/index.html',context)
 
 def about(request):

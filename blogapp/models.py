@@ -31,7 +31,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True)
     created = models.DateTimeField(auto_now_add=True)
     thumbnail = models.ImageField(null=True,blank=True,upload_to ='images')
-    tags = models.ManyToManyField('Tag',blank=True)
+    #tags = models.ManyToManyField('Tag',blank=True)
     id = models.UUIDField(default=uuid.uuid4,editable=False,primary_key=True,unique=True)
 
     # def save(self,*args,**kwargs):
@@ -59,13 +59,13 @@ class Post(models.Model):
         return self.title
 
 
-class Tag(models.Model):
-    name = models.CharField(max_length=200)
-    created = models.DateTimeField(auto_now_add=True)
-    id = models.UUIDField(default=uuid.uuid4, unique=True,primary_key=True,editable=False)
+# class Tag(models.Model):
+#     name = models.CharField(max_length=200)
+#     created = models.DateTimeField(auto_now_add=True)
+#     id = models.UUIDField(default=uuid.uuid4, unique=True,primary_key=True,editable=False)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 class Comment(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
