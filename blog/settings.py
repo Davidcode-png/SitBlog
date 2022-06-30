@@ -31,7 +31,7 @@ key = os.environ.get('SECRET_KEY')
 SECRET_KEY = key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -144,7 +144,8 @@ STATICFILES_DIRS = [
 ]
 
 
-STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
+#STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # WHITENOISE_AUTOREFRESH = True
 
@@ -164,4 +165,20 @@ EMAIL_HOST_USER = 'codavidson0@gmail.com'
 EMAIL_HOST_PASSWORD = password
 EMAIL_USE_TLS = True
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}
