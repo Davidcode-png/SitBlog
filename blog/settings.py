@@ -31,7 +31,7 @@ key = os.environ.get('SECRET_KEY')
 SECRET_KEY = key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -144,8 +144,10 @@ STATICFILES_DIRS = [
 ]
 
 
-STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
+#STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # WHITENOISE_AUTOREFRESH = True
 
