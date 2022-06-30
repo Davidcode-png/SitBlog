@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    #'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -144,8 +144,8 @@ STATICFILES_DIRS = [
 ]
 
 
-#STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # WHITENOISE_AUTOREFRESH = True
 
@@ -165,7 +165,7 @@ EMAIL_HOST_USER = 'codavidson0@gmail.com'
 EMAIL_HOST_PASSWORD = password
 EMAIL_USE_TLS = True
 
-#django_heroku.settings(locals())
+django_heroku.settings(locals())
 
 LOGGING = {
     'version': 1,
