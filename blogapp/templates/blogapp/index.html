@@ -180,7 +180,7 @@ Home
                     <div class="content">
                       <ul>
                         {% for post in posts|slice:':3' %}
-                        <li><a href="post-details.html">
+                        <li><a href="{%url 'post_detail' post.id%}">
                           <h5>{{post.title}}</h5>
                           <span>{{post.created}}</span>
                         </a></li>
