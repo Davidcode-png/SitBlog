@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path,re_path
 from .views import index,about,post_detail,loginUser,registerUser,logoutUser,createPost,editPost,blog,categoryView,contact,deletePost
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('',index,name='index'),
@@ -17,7 +18,7 @@ urlpatterns = [
     path('edit-post/<str:pk>/',editPost,name='edit'),
 
     path('post/<str:pk>/',post_detail,name='post_detail'),
-
+    re_path(r'^favicon\.ico$',RedirectView.as_view(url='/static/images/favicon.ico')),
 ]
 
 if settings.DEBUG:
