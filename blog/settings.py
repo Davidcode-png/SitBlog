@@ -218,6 +218,5 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
-#custom_domain = False
-
+AWS_QUERY_STRING_AUTH = False
 AWS_DEFAULT_ACL = 'public-read'
