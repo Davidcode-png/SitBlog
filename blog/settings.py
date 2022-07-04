@@ -217,3 +217,6 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+custom_domain = False
+
