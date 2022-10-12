@@ -26,6 +26,6 @@ Experience the App here: https://sitblog.herokuapp.com/<br>
     <li>User can create the post</li>
     <li>User can update the post</li>
     <li>User can delete the post</li>
-    <li>User have their own profile to maintain by himself</li>
+    <li>User have their own profile to maintain by him/herself</li>
     <li>User's uploads are stored in the AWS S3 bucket</li>
 </ul>
